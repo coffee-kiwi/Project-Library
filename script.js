@@ -16,9 +16,6 @@ function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(book);
 };
 
-// Fill in some books for testing
-
-
 // Target book container
 const container = document.getElementById("book-container");
 
@@ -41,9 +38,14 @@ function displayBooks() {
         const read = document.createElement("p");
         read.textContent = `Already read: ${book.read}` ;
 
+        const updateRead = document.createElement("button");
+        updateRead.textContent = "Read: Yes/No";
+        updateRead.dataset.id = book.id;
+        updateRead.classList.add("update-btn");
+
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Remove Book";
-        deleteBtn.dataset.id = `${book.id}`;
+        deleteBtn.dataset.id = book.id;
         deleteBtn.classList.add("delete-btn");
 
         // Append child nodes together
@@ -51,12 +53,14 @@ function displayBooks() {
         card.appendChild(author);
         card.appendChild(pages);
         card.appendChild(read);
+        card.appendChild(updateRead);
         card.appendChild(deleteBtn);
         container.appendChild(card);
     });
 
 };
 
+// Fill in some books for testing
 addBookToLibrary("The Fellowship of the Ring", "JRR Tolkien", 1000, "Yes");
 addBookToLibrary("Harry Potter and the Philosophers Stone", "JK Rowling", 897, "Yes");
 addBookToLibrary("Blackflame", "That guy", 356, "Yes");
@@ -93,7 +97,18 @@ bookList.addEventListener("click", (event) => {
         if (ind !== -1) {
             myLibrary.splice(ind, 1)
         }
-        
-        displayBooks();
     }
+
+    if (event.target.classList.contains("update-btn")) {
+        const bookId = event.target.dataset.id;
+        const bookToUpdate = myLibrary.find(book => book.id == bookId);
+
+        if (bookToUpdate.read == "Yes") {
+            bookToUpdate.read = "No";
+        } else {
+            bookToUpdate.read = "Yes";
+        }
+
+    }
+    displayBooks();
 });
