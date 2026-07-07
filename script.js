@@ -16,6 +16,14 @@ function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(book);
 };
 
+Book.prototype.toggleRead = function() {
+        if (this.read == "Yes") {
+            this.read = "No";
+        } else {
+            this.read = "Yes";
+        }
+}
+
 // Target book container
 const container = document.getElementById("book-container");
 
@@ -61,11 +69,11 @@ function displayBooks() {
 };
 
 // Fill in some books for testing
-addBookToLibrary("The Fellowship of the Ring", "JRR Tolkien", 1000, "Yes");
-addBookToLibrary("Harry Potter and the Philosophers Stone", "JK Rowling", 897, "Yes");
-addBookToLibrary("Blackflame", "That guy", 356, "Yes");
-addBookToLibrary("Mistborn", "Famous author", 986, "Yes");
-addBookToLibrary("Song of Fire and Ice", "Old guy", 8374, "No");
+addBookToLibrary("The Fellowship of the Ring", "JRR Tolkien", 576, "Yes");
+addBookToLibrary("Harry Potter and the Philosophers Stone", "JK Rowling", 352, "Yes");
+addBookToLibrary("Blackflame", "Will Wight", 369, "Yes");
+addBookToLibrary("Mistborn", "Brandon Sanderson", 672, "Yes");
+addBookToLibrary("A Knight of the Seven Kingdoms", "George RR Martin", 368, "Yes");
 displayBooks();
 
 // Form and buttons
@@ -102,13 +110,7 @@ bookList.addEventListener("click", (event) => {
     if (event.target.classList.contains("update-btn")) {
         const bookId = event.target.dataset.id;
         const bookToUpdate = myLibrary.find(book => book.id == bookId);
-
-        if (bookToUpdate.read == "Yes") {
-            bookToUpdate.read = "No";
-        } else {
-            bookToUpdate.read = "Yes";
-        }
-
+        bookToUpdate.toggleRead();
     }
     displayBooks();
 });
