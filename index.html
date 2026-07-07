@@ -19,10 +19,9 @@
         </section>
 
         <div>
-            <button command="show-modal" commandfor="new-book-dialog">Add a new book?</button>
-
+            <button command="show-modal" commandfor="new-book-dialog" class="add-book">Add a new book?</button>
             <dialog id="new-book-dialog">
-                <p>Does it open?</p>
+        
                 <form action="dialog" id="book-form">
                     <h2>Add a book to the library</h2>
                     <div class="form-group">
@@ -51,7 +50,7 @@
                 <button commandfor="new-book-dialog" command="close">Cancel</button>
             </dialog>
         </div>
-        <output></output>
+
     </main>
     
 </body>

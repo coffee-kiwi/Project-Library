@@ -25,7 +25,37 @@ header {
     border-radius: 5px;
 }
 
+dialog {
+    margin: auto;
+    
+    background-color: slategrey;
+
+}
+
 dialog::backdrop {
     background-color: lightgray;
     opacity: 0.75;
+}
+
+button {
+    padding: 8px;
+    font-size: medium;
+    border-radius: 5px;
+}
+
+#addBtn,
+.add-book {
+    background-color: darkolivegreen;
+    color: white;
+    border: solid darkolivegreen 1px;
+}
+
+.update-btn {
+    background-color: slategrey;
+    padding: 4px;
+}
+
+.delete-btn {
+    background-color: orangered;
+    padding: 4px;
 }
