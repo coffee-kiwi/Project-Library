@@ -41,11 +41,17 @@ function displayBooks() {
         const read = document.createElement("p");
         read.textContent = `Already read: ${book.read}` ;
 
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Remove Book";
+        deleteBtn.dataset.id = `${book.id}`;
+        deleteBtn.classList.add("delete-btn");
+
         // Append child nodes together
         card.appendChild(heading);
         card.appendChild(author);
         card.appendChild(pages);
         card.appendChild(read);
+        card.appendChild(deleteBtn);
         container.appendChild(card);
     });
 
@@ -76,3 +82,18 @@ addBtn.addEventListener("click", (event) => {
     displayBooks();
 });
 
+// Add delete button functionality
+const bookList = document.getElementById("book-container");
+
+bookList.addEventListener("click", (event) => {
+    if (event.target.classList.contains("delete-btn")) {
+        const itemId = event.target.dataset.id;
+        const ind = myLibrary.findIndex(book => book.id == itemId);
+
+        if (ind !== -1) {
+            myLibrary.splice(ind, 1)
+        }
+        
+        displayBooks();
+    }
+});
