@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightslategray;
+}
+
+header {
+    background-color: darkolivegreen;
+    padding: 24px;
+}
+
+#book-container {
+    padding: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 24px;
+}
+
+.book-card {
+    border: 1px darkgrey solid;
+    border-radius: 5px;
+}
+
+dialog::backdrop {
+    background-color: lightgray;
+    opacity: 0.75;
+}
