@@ -16,8 +16,63 @@ function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(book);
 };
 
+// Fill in some books for testing
+
+
+// Target book container
+const container = document.getElementById("book-container");
+
 function displayBooks() {
-    for (let i = 0; i < myLibrary.length; i++ ) {
-        console.log(myLibrary[i]);
-    }
+    container.innerHTML = "";
+// Iterate through library and build DOM elements
+    myLibrary.forEach(book => {
+        const card = document.createElement("div");
+        card.className = "book-card";
+
+        const heading = document.createElement("h2");
+        heading.textContent = book.title;
+
+        const author = document.createElement("p");
+        author.textContent =`Author: ${book.author}`;
+
+        const pages = document.createElement("p");
+        pages.textContent = `${book.pages} pages`;
+
+        const read = document.createElement("p");
+        read.textContent = `Already read: ${book.read}` ;
+
+        // Append child nodes together
+        card.appendChild(heading);
+        card.appendChild(author);
+        card.appendChild(pages);
+        card.appendChild(read);
+        container.appendChild(card);
+    });
+
 };
+
+addBookToLibrary("The Fellowship of the Ring", "JRR Tolkien", 1000, "Yes");
+addBookToLibrary("Harry Potter and the Philosophers Stone", "JK Rowling", 897, "Yes");
+addBookToLibrary("Blackflame", "That guy", 356, "Yes");
+addBookToLibrary("Mistborn", "Famous author", 986, "Yes");
+addBookToLibrary("Song of Fire and Ice", "Old guy", 8374, "No");
+displayBooks();
+
+// Form and buttons
+const bookDialog = document.getElementById("new-book-dialog");
+const form = document.getElementById("book-form");
+
+
+addBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    console.log(`Submitted data: `, data)
+    form.reset(); 
+    addBookToLibrary(data["title"], data["author"], data["pages"], data["read"]);
+    bookDialog.close();
+    displayBooks();
+});
+
