@@ -58,3 +58,8 @@ button {
     background-color: orangered;
     padding: 4px;
 }
+
+.invalid {
+    background-color: mediumaquamarine;
+    border: 2px dotted blueviolet;
+}

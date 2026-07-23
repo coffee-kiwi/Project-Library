@@ -29,10 +29,10 @@
                         <input type="text" id="title" name="title" autofocus required>
 
                         <label for="author">Author:</label>
-                        <input type="text" id="author" name="author">
+                        <input type="text" id="author" name="author" required>
 
                         <label for="pages">Number of pages:</label>
-                        <input type="text" name="pages" id="pages">
+                        <input type="text" name="pages" id="pages" required>
 
                         <label for="read">Have you read it?</label>
                         <select name="read" id="read">
@@ -42,8 +42,8 @@
                     </div>
 
                     <div class="form-actions">
-
                         <button type="submit" id="addBtn" value="add">Add Book</button>
+                        <span id="error"></span>
                     </div>
                 </form>
 

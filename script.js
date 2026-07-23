@@ -66,74 +66,6 @@ class BookClass {
             });
         }
 
-
-
-// function Book(title, author, pages, read) {
-//     if (!new.target) {
-//         throw Error("You must use the 'new' operator to call this constructor.");
-//     }
-//     this.title = title;
-//     this.author = author;
-//     this.pages = pages;
-//     this.read = read;
-//     this.id = crypto.randomUUID();
-//     };
-
-// function addBookToLibrary(title, author, pages, read) {
-//     book = new Book(title, author, pages, read);
-//     myLibrary.push(book);
-// };
-
-// Book.prototype.toggleRead = function() {
-//         if (this.read == "Yes") {
-//             this.read = "No";
-//         } else {
-//             this.read = "Yes";
-//         }
-// }
-
-// Target book container
-// const container = document.getElementById("book-container");
-
-// function displayBooks() {
-//     container.innerHTML = "";
-// // Iterate through library and build DOM elements
-//     myLibrary.forEach(book => {
-//         const card = document.createElement("div");
-//         card.className = "book-card";
-
-//         const heading = document.createElement("h2");
-//         heading.textContent = book.title;
-
-//         const author = document.createElement("p");
-//         author.textContent =`Author: ${book.author}`;
-
-//         const pages = document.createElement("p");
-//         pages.textContent = `${book.pages} pages`;
-
-//         const read = document.createElement("p");
-//         read.textContent = `Already read: ${book.read}` ;
-
-//         const updateRead = document.createElement("button");
-//         updateRead.textContent = "Read: Yes/No";
-//         updateRead.dataset.id = book.id;
-//         updateRead.classList.add("update-btn");
-
-//         const deleteBtn = document.createElement("button");
-//         deleteBtn.textContent = "Remove Book";
-//         deleteBtn.dataset.id = book.id;
-//         deleteBtn.classList.add("delete-btn");
-
-//         // Append child nodes together
-//         card.appendChild(heading);
-//         card.appendChild(author);
-//         card.appendChild(pages);
-//         card.appendChild(read);
-//         card.appendChild(updateRead);
-//         card.appendChild(deleteBtn);
-//         container.appendChild(card);
-//     });
-
 };
 
 // Fill in some books for testing
@@ -149,20 +81,54 @@ BookClass.displayBooks();
 // Form and buttons
 const bookDialog = document.getElementById("new-book-dialog");
 const form = document.getElementById("book-form");
+const errorMessage = document.getElementById("error")
+
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+});
 
 
 addBtn.addEventListener("click", (event) => {
     event.preventDefault();
-
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    console.log(`Submitted data: `, data)
-    form.reset(); 
-    BookClass.addBookToLibrary(data["title"], data["author"], data["pages"], data["read"]);
-    bookDialog.close();
-    BookClass.displayBooks();
-});
+    if (!form.checkValidity()) {
+        event.stopPropagation();
+        highlightInvalidInputs();
+    } else {
+        console.log(`Submitted data: `, data)
+        form.reset(); 
+        BookClass.addBookToLibrary(data["title"], data["author"], data["pages"], data["read"]);
+        bookDialog.close();
+        BookClass.displayBooks();
+        }
+    });
+
+function highlightInvalidInputs() {
+    const inputs = document.querySelectorAll("input");
+
+    inputs.forEach(input => {
+        if (!input.validity.valid) {
+            input.classList.add("invalid");
+            errorMessage.textContent = "Some informations is missing";
+        } else {
+            input.classList.remove("invalid");
+        }
+    });
+}
+
+// title.addEventListener("input", (event) => {
+//     if (title.validity.valueMissing) {
+//         errorMessage.textContent = "Please enter a title";
+//     } else {
+//         errorMessage.textContent = "";
+//     }
+// });
+
+
 
 // Add delete button functionality
 const bookList = document.getElementById("book-container");
